@@ -10,7 +10,7 @@ COPY Gemfile.lock Gemfile.lock
 
 RUN bundle install
 COPY . .
-COPY ./database.yml /app/config/database.yml
+# COPY ./database.yml /app/config/database.yml
 
 ENV PORT=8080
 
