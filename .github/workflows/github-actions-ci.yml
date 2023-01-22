@@ -18,6 +18,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Check database
+      run: ls /app/config
+      shell: bash
+
+    - name: Check file 
+      run: cat /app/config/database.yml
+      shell: bash
+      
     - name: Set up Ruby
       uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
       with:
@@ -26,12 +34,6 @@ jobs:
     - name: Install Dependencies
       run: bundle install
     
-    - name: Check database
-    - run: ls /app/config
-
-    - name: Check file 
-    - run: cat /app/config/database.yml
-
     - name: Run tests
       run: bundle exec rake db:setup
 
