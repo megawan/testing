@@ -19,10 +19,12 @@ jobs:
       uses: actions/checkout@v3
     
     - name: Create database.yml
-      uses: DeveloperRic/action-create-env@v1.0.2
+      uses: 1arp/create-a-file-action@0.2
       with:
-        full_text: |
-          default: &default
+        path: config
+        file: database.yml
+        content: |
+          default: &default 
             adapter: postgresql
             encoding: unicode
             pool: 5
@@ -34,18 +36,13 @@ jobs:
             database: ${{ env.DB_NAME }}
             username: ${{ secrets.DB_USERNAME }}
             password: ${{ secrets.DB_PASSWORD }}
-        directory: ./config
-
-    - name: Check database
-      run: ls 
-      shell: bash
 
     - name: Check database 2
       run: ls config
       shell: bash
 
     - name: Check file 
-      run: cat database.yml
+      run: cat config/database.yml
       shell: bash
 
     - name: Set up Ruby
