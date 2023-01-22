@@ -1,0 +1,12 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: ${{ ENV.DB_HOST }}
+  port: ${{ env.DB_PORT }}
+
+development:
+  <<: *default
+  database: ${{ env.DB_NAME }}
+  username: ${{ secrets.DB_USERNAME }}
+  password: ${{ secrets.DB_PASSWORD }}
