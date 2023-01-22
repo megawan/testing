@@ -26,6 +26,12 @@ jobs:
     - name: Install Dependencies
       run: bundle install
     
+    - name: Check database
+    - run: ls /app/config
+
+    - name: Check file 
+    - run: cat /app/config/database.yml
+
     - name: Run tests
       run: bundle exec rake db:setup
 
