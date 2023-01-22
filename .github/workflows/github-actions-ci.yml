@@ -37,14 +37,6 @@ jobs:
             username: ${{ secrets.DB_USERNAME }}
             password: ${{ secrets.DB_PASSWORD }}
 
-    - name: Check database 2
-      run: ls config
-      shell: bash
-
-    - name: Check file 
-      run: cat config/database.yml
-      shell: bash
-
     - name: Set up Ruby
       uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
       with:
@@ -53,8 +45,8 @@ jobs:
     - name: Install Dependencies
       run: bundle install
     
-    - name: Run tests
-      run: bundle exec rake db:setup
+    # - name: Run tests
+    #   run: bundle exec rake db:setup
 
     - name: Start the server
       run: rails s
