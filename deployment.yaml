@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: todo-deployment
+  name: todo
   namespace: default
   labels:
     app: web
@@ -36,7 +36,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: todo-service
+  name: todo
   namespace: default
   annotations:
     #alb.ingress.kubernetes.io/healthcheck-path: /index.html
@@ -49,4 +49,4 @@ spec:
       # this service will expose this port
       - port: 80
       # Port we're targeting on the pod container
-        targetPort: 80
+        targetPort: 8080

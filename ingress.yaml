@@ -10,7 +10,7 @@ metadata:
     # Ingress Core Settings
     #kubernetes.io/ingress.class: "alb" (OLD INGRESS CLASS NOTATION - STILL WORKS BUT RECOMMENDED TO USE IngressClass Resource)
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/healthcheck-path: /*
+    alb.ingress.kubernetes.io/healthcheck-path: /
     # Health Check Settings
     alb.ingress.kubernetes.io/healthcheck-protocol: HTTP 
     alb.ingress.kubernetes.io/healthcheck-port: traffic-port  
@@ -23,6 +23,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: todo-service
+                name: todo
                 port: 
                   number: 80
