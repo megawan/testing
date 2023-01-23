@@ -28,12 +28,12 @@ jobs:
             adapter: postgresql
             encoding: unicode
             pool: 5
-            host: ${{ vars.DB_HOST }}
-            port: ${{ vars.DB_PORT }}
+            host: db.gika.dev
+            port: 5432
 
           development:
             <<: *default
-            database: ${{ vars.DB_NAME }}
+            database: postgres
             username: ${{ secrets.DB_USERNAME }}
             password: ${{ secrets.DB_PASSWORD }}
 
