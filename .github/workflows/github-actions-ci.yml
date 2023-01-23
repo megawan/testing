@@ -33,7 +33,7 @@ jobs:
 
           development:
             <<: *default
-            database: postgres
+            database: ${{ secrets.DB_USERNAME }}
             username: ${{ secrets.DB_USERNAME }}
             password: ${{ secrets.DB_PASSWORD }}
 
