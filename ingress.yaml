@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cpr-ingress
+  labels:
+    app: web
+  annotations:
+    # Load Balancer Name
+    # alb.ingress.kubernetes.io/load-balancer-name: cpr-ingress
+    # Ingress Core Settings
+    #kubernetes.io/ingress.class: "alb" (OLD INGRESS CLASS NOTATION - STILL WORKS BUT RECOMMENDED TO USE IngressClass Resource)
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/healthcheck-path: /*
+    # Health Check Settings
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP 
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port  
+spec:
+  ingressClassName: aws-ingress-class   # Ingress Class                  
+  rules:
+    - http:
+        paths:      
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: todo-service
+                port: 
+                  number: 80

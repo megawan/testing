@@ -1,0 +1,9 @@
+apiVersion: elbv2.k8s.aws/v1beta1
+kind: TargetGroupBinding
+metadata:
+  name: web
+spec:
+  serviceRef:
+    name: todo-service # route traffic to the awesome-service
+    port: 80
+  targetGroupARN: arn:aws:elasticloadbalancing:eu-west-1:995105043624:targetgroup/k8s/05c16d42c8f58934

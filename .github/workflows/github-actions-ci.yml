@@ -28,12 +28,12 @@ jobs:
             adapter: postgresql
             encoding: unicode
             pool: 5
-            host: ${{ ENV.DB_HOST }}
-            port: ${{ env.DB_PORT }}
+            host: ${{ vars.DB_HOST }}
+            port: ${{ vars.DB_PORT }}
 
           development:
             <<: *default
-            database: ${{ env.DB_NAME }}
+            database: ${{ vars.DB_NAME }}
             username: ${{ secrets.DB_USERNAME }}
             password: ${{ secrets.DB_PASSWORD }}
 
@@ -82,6 +82,5 @@ jobs:
 
     - name: Deploy to EKS
       run: |
-        kubectl apply -f fedhr-postgres-deployment.yaml
-        kubectl apply -f fedhr-graphene-deployment.yaml
-        kubectl apply -f fedhr-ingress.yaml
+        kubectl apply -f deployment.yaml
+        kubectl apply -f ingress.yaml

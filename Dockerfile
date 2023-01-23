@@ -12,6 +12,6 @@ RUN bundle install
 COPY . .
 # COPY ./database.yml /app/config/database.yml
 
-ENV PORT=8080
+ENV PORT=80
 
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
