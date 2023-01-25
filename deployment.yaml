@@ -6,12 +6,14 @@ metadata:
   namespace: default
   labels:
     app: web
+    app.kubernetes.io/name: webk
 
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: web
+      app.kubernetes.io/name: web
 
   strategy:
     rollingUpdate:
@@ -23,24 +25,29 @@ spec:
     metadata:
       labels:
         app: web
+        app.kubernetes.io/name: web
     spec:
      containers:
      - name: todo
        image: 995105043624.dkr.ecr.eu-west-1.amazonaws.com/gika-container-repository:latest
-       livenessProbe:
-          httpGet:
-            path: /healthy
-            port: 8080
-          initialDelaySeconds: 5
-          timeoutSeconds: 1
-          periodSeconds: 10
-          failureThreshold: 3
-
-
       #  imagePullPolicy: IfNotPresent
        command: ["rails", "s"]
        ports:
        - containerPort: 8080
+      #  readinessProbe:
+      #   httpGet:
+      #     path: /
+      #     port: 8080
+      #   initialDelaySeconds: 10
+      #   periodSeconds: 10
+      #   timeoutSeconds: 2
+       resources:
+          limits:
+            cpu: "500m"
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
 
 ---
 apiVersion: v1
@@ -48,12 +55,16 @@ kind: Service
 metadata:
   name: todo
   namespace: default
+  labels: 
+    app: web
+    app.kubernetes.io/name: web
   # annotations:
     #alb.ingress.kubernetes.io/healthcheck-path: /index.html
 spec:
   selector:
     app: web
-  type: NodePort
+  # clusterIP: None  
+  type: ClusterIP
   ports:
     # - protocol: TCP
       # this service will expose this port
