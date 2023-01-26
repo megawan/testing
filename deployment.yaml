@@ -59,7 +59,7 @@ metadata:
     app: web
     app.kubernetes.io/name: web
   annotations:
-    alb.ingress.kubernetes.io/healthcheck-path: /index.html
+    alb.ingress.kubernetes.io/healthcheck-path: /app/public/404.html
 spec:
   selector:
     app: web
