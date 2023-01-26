@@ -10,11 +10,12 @@ metadata:
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-1:995105043624:certificate/0cf804ce-92f9-4223-bc5b-ef006e2e17ed
     alb.ingress.kubernetes.io/ssl-redirect: '443'
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
-    # alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
+    alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
+    # alb.ingress.kubernetes.io/group.name: shared
     alb.ingress.kubernetes.io/backend-protocol: HTTP
     alb.ingress.kubernetes.io/security-groups: sg-053f2aabff22b4cd2
     # Health Check Settings
-    alb.ingress.kubernetes.io/healthcheck-path: /healthz
+    alb.ingress.kubernetes.io/healthcheck-path: /
     alb.ingress.kubernetes.io/healthcheck-protocol: HTTP 
     alb.ingress.kubernetes.io/healthcheck-port: traffic-port #status-port  
 spec:
@@ -22,8 +23,15 @@ spec:
   rules:
     # - host: todo.gika.dev
     - http:
-        paths:      
-          - path: /
+        paths:  
+          - path: /app1/
+            pathType: Prefix
+            backend:
+              service: 
+                name: app1-nginx-nodeport-service
+                port: 
+                  number: 80 
+          - path: /test/
             pathType: Prefix
             backend:
               service:

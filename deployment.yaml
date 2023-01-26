@@ -6,7 +6,7 @@ metadata:
   namespace: default
   labels:
     app: web
-    app.kubernetes.io/name: webk
+    app.kubernetes.io/name: web
 
 spec:
   replicas: 1
@@ -36,7 +36,7 @@ spec:
        - containerPort: 8080
       #  readinessProbe:
       #   httpGet:
-      #     path: /
+      #     path: /health_check/healthcheck
       #     port: 8080
       #   initialDelaySeconds: 10
       #   periodSeconds: 10
@@ -58,13 +58,13 @@ metadata:
   labels: 
     app: web
     app.kubernetes.io/name: web
-  # annotations:
-    #alb.ingress.kubernetes.io/healthcheck-path: /index.html
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-path: /index.html
 spec:
   selector:
     app: web
   # clusterIP: None  
-  type: ClusterIP
+  type: NodePort #ClusterIP
   ports:
     # - protocol: TCP
       # this service will expose this port
